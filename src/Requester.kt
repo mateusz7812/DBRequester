@@ -7,7 +7,7 @@ import java.net.HttpURLConnection
 
 
 class Requester(host: String = "localhost", port: Int = 8080){
-    val url = URL("tcp", host, port, null)
+    val url = URL("$host:$port")
     private lateinit var conn: HttpURLConnection
 
     fun open(){
@@ -36,7 +36,7 @@ class Requester(host: String = "localhost", port: Int = 8080){
             val instream = conn.inputStream
             val rd = BufferedReader(InputStreamReader(instream))
             val response = StringBuilder() // or StringBuffer if Java version 5+
-            var line = ""
+            var line: String
             while (true) {
                 line = rd.readLine()
                 if(line  == null) {
