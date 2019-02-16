@@ -6,8 +6,8 @@ import java.lang.Exception
 import java.net.HttpURLConnection
 
 
-class Requester(host: String = "localhost"){
-    val url = URL(host)
+class Requester(host: String = "localhost", port: Int = 8080){
+    val url = URL("tcp", host, port, null)
     private lateinit var conn: HttpURLConnection
 
     fun open(){
