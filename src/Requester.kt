@@ -7,7 +7,7 @@ import java.net.HttpURLConnection
 
 
 class Requester(host: String = "localhost", port: Int = 8080){
-    val url = URL("$host:$port")
+    val url = URL("http://$host:$port")
     private lateinit var conn: HttpURLConnection
 
     fun open(){
@@ -21,7 +21,7 @@ class Requester(host: String = "localhost", port: Int = 8080){
     fun make_request(data: String): String? {
         open()
         try{
-            conn.setRequestProperty("method", "POST")
+            conn.requestMethod = "POST"
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded")
             conn.setRequestProperty("Content-Length", Integer.toString(data.toByteArray().size))
             conn.setRequestProperty("Content-Language", "en-US")
@@ -36,10 +36,10 @@ class Requester(host: String = "localhost", port: Int = 8080){
             val instream = conn.inputStream
             val rd = BufferedReader(InputStreamReader(instream))
             val response = StringBuilder() // or StringBuffer if Java version 5+
-            var line: String
+            var line: String?
             while (true) {
                 line = rd.readLine()
-                if(line  == null) {
+                if(line == null){
                     break
                 }
                 response.append(line)

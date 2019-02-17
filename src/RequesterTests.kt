@@ -1,7 +1,7 @@
 import kotlin.test.assertEquals
 
 
-annotation class Test {
+class Test {
 
     fun test_(){
     }
